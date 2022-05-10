@@ -1,6 +1,6 @@
 # Deno REST API
 
-> This is a simple REST API using Deno and Oak. It is part of Deno course.
+> This is a simple REST API using Deno.
 
 ## Run
 
