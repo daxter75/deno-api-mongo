@@ -37,25 +37,28 @@ let activities : Activity[] = [
   ];
 
 // @route   GET /api/v1/activities
-const getActivities = ({ response }: { response: any }) => {
+const getActivities = async ({ response }: { response: any }) => {
+
+  const activitiesDb = await activitiesCollection.find({}).toArray();
+    console.log('total activities: ' + activitiesDb.length)
     response.body = {
       success: true,
-      data: activities,
+      data: activitiesDb,
     };
   };
   
   // @desc    Get single Activity
   // @route   GET /api/v1/activities/:id
-  const getActivity = ({
+  const getActivity = async ({
     params,
     response,
   }: {
     params: { id: string };
     response: any;
   }) => {
-    const activity: Activity | undefined = activities.find(
-      (p) => p.id === params.id
-    );
+    const activity = await activitiesCollection.findOne ({
+      id: params.id
+    });
   
     console.log(activity);
   
