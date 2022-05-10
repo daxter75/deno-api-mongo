@@ -3,6 +3,7 @@
 import { Activity } from "../types/activity.ts";
 import { v4 } from "https://deno.land/std@0.137.0/uuid/mod.ts";
 import db from "../mongodb.ts";
+import { Bson } from "https://deno.land/x/mongo@v0.29.4/mod.ts";
 
 const activitiesCollection = db.collection('activities');
 
@@ -57,9 +58,9 @@ const getActivities = async ({ response }: { response: any }) => {
     response: any;
   }) => {
     const activity = await activitiesCollection.findOne ({
-      id: params.id
+      _id: new Bson.ObjectId(params.id)
     });
-  
+
     console.log(activity);
   
     if (activity) {
